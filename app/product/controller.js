@@ -37,7 +37,7 @@ const store = (req, res) => {
     const image = req.file;
 
     if (image) {
-        value = { name, price, stock, status, image_url: `images/${image.filename}` };
+        value = { name, price, stock, status, image_url: image.filename };
     }
 
     Product.create(value)
@@ -57,7 +57,7 @@ const update = (req, res) => {
     let value = { name, price, stock, status };
 
     if (image) {
-        value = { name, price, stock, status, image_url: `images/${image.filename}` };
+        value = { name, price, stock, status, image_url: image.filename };
     }
 
     Product.findById(id)
@@ -109,7 +109,7 @@ const destroy = (req, res) => {
 const removeImage = (filePath) => {
     console.log('filePath', filePath);
 
-    filePath = path.join(__dirname, '../../public', filePath);
+    filePath = path.join(__dirname, '../../public/images', filePath);
     fs.unlink(filePath, err => console.log(err));
 };
 

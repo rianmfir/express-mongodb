@@ -27,9 +27,8 @@ const store = (req, res) => {
     let value = { name, price, stock, status };
 
     if (image) {
-        value = { name, price, stock, status, image_url: `images/${image.filename}` };
+        value = { name, price, stock, status, image_url: image.filename };
     }
-
 
     db.collection('products').insertOne(value)
         .then(result => res.send(result))
@@ -45,7 +44,7 @@ const update = async (req, res) => {
     const data = await db.collection('products').findOne({ _id: ObjectId(id) });
 
     if (image) {
-        value = { name, price, stock, status, image_url: `images/${image.filename}` };
+        value = { name, price, stock, status, image_url: image.filename };
 
         removeImage(data.image_url);
     }
@@ -79,7 +78,7 @@ const destroy = async (req, res) => {
 };
 
 const removeImage = (filePath) => {
-    filePath = path.join(__dirname, '../../public', filePath);
+    filePath = path.join(__dirname, '../../public/images', filePath);
     fs.unlink(filePath, err => console.log(err));
 };
 

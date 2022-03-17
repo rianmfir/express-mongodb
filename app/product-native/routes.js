@@ -14,12 +14,14 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: storage
+}).single('image');
 
 router.get('/product', productNativeController.index);
 router.get('/product/:id', productNativeController.view);
-router.post('/product', upload.single('image_url'), productNativeController.store);
-router.put('/product/:id', upload.single('image_url'), productNativeController.update);
-router.delete('/product/:id', upload.single('image_url'), productNativeController.destroy);
+router.post('/product', upload, productNativeController.store);
+router.put('/product/:id', upload, productNativeController.update);
+router.delete('/product/:id', upload, productNativeController.destroy);
 
 module.exports = router;

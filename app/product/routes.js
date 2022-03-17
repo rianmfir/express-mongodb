@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage
-}).single('image_url');
+}).single('image');
 
 router.get('/product', productController.index);
 router.get('/product/:id', productController.view);
