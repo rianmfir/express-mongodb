@@ -33,7 +33,7 @@ const view = (req, res) => {
 
 const store = (req, res) => {
     const { name, price, stock, status } = req.body;
-    let value = { name, price, stock, status };
+    let value = { name, price, stock, status, image_url: "" };
     const image = req.file;
 
     if (image) {
